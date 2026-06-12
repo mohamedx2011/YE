@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>اقتراحاتي لك - يونس</title>
+    <link href="https://fonts.googleapis.com/css2?display=swap&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(145deg, #ffe4ec 0%, #ffc0cb 100%);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .suggestions-container {
+            max-width: 500px;
+            width: 100%;
+            margin: 20px auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #e84393, #fd79a8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        .header p {
+            color: #b34180;
+            font-size: 1rem;
+            margin-top: 8px;
+        }
+
+        .cards-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .suggest-card {
+            background: rgba(255, 245, 250, 0.96);
+            border-radius: 48px;
+            padding: 28px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 12px 25px rgba(255, 105, 180, 0.2);
+            border: 2px solid #ffb7c5;
+            animation: fadeInUp 0.6s ease backwards;
+        }
+
+        .suggest-card:hover {
+            transform: translateY(-5px);
+            background: #fff0f5;
+        }
+
+        .suggest-card:active {
+            transform: scale(0.97);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .suggest-card:nth-child(1) { animation-delay: 0.1s; }
+        .suggest-card:nth-child(2) { animation-delay: 0.2s; }
+        .suggest-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #c44569;
+            margin-bottom: 8px;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: #b98092;
+        }
+
+        .back-btn {
+            background: #f78fb3;
+            border: none;
+            padding: 14px 28px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 60px;
+            color: white;
+            cursor: pointer;
+            margin: 30px auto 20px;
+            box-shadow: 0 5px 0 #b34180;
+            display: block;
+            width: 80%;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .back-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #b34180;
+        }
+
+        @media (max-width: 550px) {
+            .suggest-card { padding: 20px 16px; }
+            .card-title { font-size: 1.3rem; }
+            .card-icon { font-size: 2.5rem; }
+            .back-btn { font-size: 1rem; width: 90%; }
+        }
+
+        .sparkle-pink {
+            position: fixed;
+            background: #ff99cc;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            opacity: 0.7;
+            pointer-events: none;
+            animation: twinkle 1s infinite alternate;
+            z-index: 999;
+        }
+
+        @keyframes twinkle {
+            0% { transform: scale(1); opacity: 0.2; }
+            100% { transform: scale(2); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="suggestions-container">
+    <div class="header">
+        <h1>💡 اقتراحاتي لك</h1>
+        <p>✨إضغط على المربعات✨</p>
+    </div>
+
+    <div class="cards-grid">
+        <!-- مربع 1: أغنية ستعجبك - يذهب مباشرة لليوتيوب -->
+        <div class="suggest-card" id="songCard">
+            <div class="card-icon">🎵🎧</div>
+            <div class="card-title">أغنية ستعجبك</div>
+            <div class="card-desc">مناسب لك</div>
+        </div>
+
+        <!-- مربع 2: طريق الهداية -->
+        <div class="suggest-card" id="quranCard">
+            <div class="card-icon">🕌📖</div>
+            <div class="card-title">طريق الهداية</div>
+            <div class="card-desc">إستمع إلى الأيات الأولى بقلبك</div>
+        </div>
+
+        <!-- مربع 3: نصيحة -->
+        <div class="suggest-card" id="adviceCard">
+            <div class="card-icon">💬🌸</div>
+            <div class="card-title">نصيحة</div>
+            <div class="card-desc">نصيحة خالصة دون إستهزاء</div>
+        </div>
+    </div>
+
+    <button class="back-btn" id="backBtn">🔙 رجوع للذكريات</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+<script>
+    function launchPinkConfetti() {
+        confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 }, colors: ['#ff99cc', '#ffb7c5', '#ff6b9d', '#fbc4d2'] });
+        setTimeout(() => confetti({ particleCount: 80, spread: 100, origin: { y: 0.5 }, colors: ['#ffb7c5', '#ff99cc'] }), 150);
+        setTimeout(() => confetti({ particleCount: 100, spread: 70, origin: { y: 0.7, x: 0.3 }, colors: ['#ff6b9d'] }), 300);
+    }
+
+    function createPinkSparkles() {
+        for (let i = 0; i < 60; i++) {
+            let spark = document.createElement('div');
+            spark.classList.add('sparkle-pink');
+            spark.style.left = Math.random() * window.innerWidth + 'px';
+            spark.style.top = Math.random() * window.innerHeight + 'px';
+            spark.style.width = (Math.random() * 8 + 2) + 'px';
+            spark.style.height = spark.style.width;
+            document.body.appendChild(spark);
+            setTimeout(() => { if (spark && spark.remove) spark.remove(); }, 4000);
+        }
+    }
+
+    window.addEventListener('load', () => {
+        launchPinkConfetti();
+        createPinkSparkles();
+    });
+
+    // رابط الأغنية المباشر
+    const songLink = "https://www.youtube.com/watch?v=z3OKd5b2Rlw&list=RDz3OKd5b2Rlw&start_radio=1";
+
+    document.getElementById('songCard').addEventListener('click', () => {
+        launchPinkConfetti();
+        createPinkSparkles();
+        setTimeout(() => { window.location.href = songLink; }, 300);
+    });
+
+    document.getElementById('quranCard').addEventListener('click', () => {
+        launchPinkConfetti();
+        createPinkSparkles();
+        setTimeout(() => { window.location.href = "quran.html"; }, 300);
+    });
+
+    document.getElementById('adviceCard').addEventListener('click', () => {
+        launchPinkConfetti();
+        createPinkSparkles();
+        setTimeout(() => { window.location.href = "advice.html"; }, 300);
+    });
+
+    document.getElementById('backBtn').addEventListener('click', () => {
+        window.location.href = "memories.html";
+    });
+</script>
+</body>
+</html>
